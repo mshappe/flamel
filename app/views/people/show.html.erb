@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sca name:</b>
+  <%= @person.sca_name %>
+</p>
+
+<p>
+  <b>Subtopic:</b>
+  <%= @person.subtopic_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
   setup do
-    @group = groups(:one)
+    @group = FactoryGirl.build :valid_group
   end
 
   test "should get index" do
@@ -25,21 +25,25 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test "should show group" do
+    @group.save!
     get :show, id: @group
     assert_response :success
   end
 
   test "should get edit" do
+    @group.save!
     get :edit, id: @group
     assert_response :success
   end
 
   test "should update group" do
+    @group.save!
     put :update, id: @group, group: { name: @group.name }
     assert_redirected_to group_path(assigns(:group))
   end
 
   test "should destroy group" do
+    @group.save!
     assert_difference('Group.count', -1) do
       delete :destroy, id: @group
     end

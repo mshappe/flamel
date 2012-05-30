@@ -20,7 +20,9 @@ class SubtopicTest < ActiveSupport::TestCase
   end
   
   test "subtopic names must be unique" do
-    @not_unique_subtopic = FactoryGirl.build :valid_subtopic
+    @not_unique_subtopic = Subtopic.create( { name: @good_subtopic.name, topic_id: @good_subtopic.topic.id } )
+    p @good_subtopic
+    p @not_unique_subtopic
     assert @not_unique_subtopic.invalid?
   end
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TopicsControllerTest < ActionController::TestCase
   setup do
-    @topic = topics(:one)
+    @topic = FactoryGirl.build :valid_topic
   end
 
   test "should get index" do
@@ -25,21 +25,25 @@ class TopicsControllerTest < ActionController::TestCase
   end
 
   test "should show topic" do
+    @topic.save!
     get :show, id: @topic
     assert_response :success
   end
 
   test "should get edit" do
+    @topic.save!
     get :edit, id: @topic
     assert_response :success
   end
 
   test "should update topic" do
+    @topic.save!
     put :update, id: @topic, topic: { name: @topic.name }
     assert_redirected_to topic_path(assigns(:topic))
   end
 
   test "should destroy topic" do
+    @topic.save!
     assert_difference('Topic.count', -1) do
       delete :destroy, id: @topic
     end

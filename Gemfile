@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'formtastic'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -38,6 +39,9 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
-	gem 'turn'
+  gem 'test-unit'
 	gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'simplecov'
+  gem 'simplecov-html'
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SubtopicsControllerTest < ActionController::TestCase
   setup do
-    @subtopic = subtopics(:one)
+    @subtopic = FactoryGirl.build :valid_subtopic
   end
 
   test "should get index" do
@@ -25,21 +25,25 @@ class SubtopicsControllerTest < ActionController::TestCase
   end
 
   test "should show subtopic" do
+    @subtopic.save!
     get :show, id: @subtopic
     assert_response :success
   end
 
   test "should get edit" do
+    @subtopic.save!
     get :edit, id: @subtopic
     assert_response :success
   end
 
   test "should update subtopic" do
+    @subtopic.save!
     put :update, id: @subtopic, subtopic: { name: @subtopic.name, topic_id: @subtopic.topic_id }
     assert_redirected_to subtopic_path(assigns(:subtopic))
   end
 
   test "should destroy subtopic" do
+    @subtopic.save!
     assert_difference('Subtopic.count', -1) do
       delete :destroy, id: @subtopic
     end

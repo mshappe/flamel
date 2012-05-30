@@ -15,7 +15,7 @@ class TopicTest < ActiveSupport::TestCase
   end
   
   test "names must be unique" do
-    @not_unique = FactoryGirl.build :valid_topic
+    @not_unique = Topic.create( { name: @good_topic.name } )
     assert @not_unique.invalid?
   end
   

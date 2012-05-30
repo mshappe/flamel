@@ -3,16 +3,14 @@ require 'test_helper'
 class PersonTest < ActiveSupport::TestCase
   setup do
     @bad_person = FactoryGirl.build :person
-    @dissociated_person = FactoryGirl.create :named_person
+    @dissociated_person = FactoryGirl.create :valid_person
     @good_person = FactoryGirl.create :associated_person
     @valid_subtopic = FactoryGirl.build :valid_subtopic
     @many_subtopics = []
     @many_people = []
     25.times do
-      @many_subtopics << FactoryGirl.build( :valid_subtopic,
-        name: FactoryGirl.generate( :valid_subtopics ) )
-      @many_people << FactoryGirl.build( :named_person, 
-        sca_name: FactoryGirl.generate( :valid_people ) ) 
+      @many_subtopics << FactoryGirl.build( :valid_subtopic )
+      @many_people << FactoryGirl.build( :valid_person )
     end
   end
   
@@ -37,7 +35,7 @@ class PersonTest < ActiveSupport::TestCase
   end
   
   test "Person name must be unique" do
-    @not_unique_person = FactoryGirl.build :associated_person
+    @not_unique_person = Person.create( { sca_name: @good_person.sca_name, group_id: @good_person.group.id })
     assert @not_unique_person.invalid?
   end
       

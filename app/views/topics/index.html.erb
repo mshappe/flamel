@@ -1,23 +1,42 @@
 <h1>Listing topics</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @topics.each do |topic| %>
-  <tr>
-    <td><%= topic.name %></td>
-    <td><%= link_to 'Show', topic %></td>
-    <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-    <td><%= link_to 'Destroy', topic, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
 <%= link_to 'New Topic', new_topic_path %>
+
+<div id="topics">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% @topics.each do |topic| %>
+        <tr>
+          <td><%= link_to topic.name, topic, remote: true, id: "topic-#{topic.id}" %></td>
+          <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+          <td><%= link_to 'Destroy', topic, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+        <script>
+            $( $( '#topic-<%= topic.id %>' ).
+                       bind( 'ajax:beforeSend',
+                             function ( evt, xhr, settings ) {
+                                 $( '#subtopics' ).html( "<h3>Stand by</h3>" )
+                             } ).
+                       bind( 'ajax:success',
+                             function ( evt, data, status, xhr ) {
+                                 $( '#subtopics' ).html( xhr.responseText )
+                             } ).
+                      bind( 'ajax:error',
+                             function ( evt, data, status, xhr ) {
+                                 $( '#subtopics' ).html( "<h3>Well...that didn't work</h3>" )
+                             } )
+            )
+
+        </script>
+    <% end %>
+  </table>
+</div>
+
+<div id="subtopics">
+
+</div>

@@ -1,3 +1,6 @@
+require 'factory_girl/syntax/default'
+require 'faker'
+
 FactoryGirl.define do
   factory :topic do
     

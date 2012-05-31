@@ -1,4 +1,6 @@
 class TopicsController < ApplicationController
+  respond_to :html, :json
+
   # GET /topics
   # GET /topics.json
   def index
@@ -15,10 +17,19 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @topic }
+    respond_with do |format|
+      format.html do
+        if request.xhr?
+          render partial: 'topic'
+        else
+          render action: 'show'
+        end
+      end
     end
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.json { render json: @topic }
+    #end
   end
 
   # GET /topics/new

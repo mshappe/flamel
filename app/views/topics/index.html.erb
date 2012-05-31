@@ -3,21 +3,6 @@
 <%= link_to 'New Topic', new_topic_path %>
 
 <script>
-    var bind_topic;
-    bind_topic = function ( id ) {
-        $( id ).bind( 'ajax:beforeSend',
-                      function ( evt, xhr, settings ) {
-                          $( '#subtopics' ).html( "<h3>Stand by</h3>" )
-                      } ).
-                bind( 'ajax:success',
-                      function ( evt, data, status, xhr ) {
-                          $( '#subtopics' ).html( xhr.responseText )
-                      } ).
-                bind( 'ajax:error',
-                      function ( evt, data, status, xhr ) {
-                          $( '#subtopics' ).html( "<h3>Well...that didn't work</h3>" )
-                      } )
-    };
 </script>
 
 <div id="topics">

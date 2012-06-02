@@ -1,4 +1,6 @@
 class SubtopicsController < ApplicationController
+  respond_to :html, :json
+
   # GET /subtopics
   # GET /subtopics.json
   def index
@@ -15,10 +17,19 @@ class SubtopicsController < ApplicationController
   def show
     @subtopic = Subtopic.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @subtopic }
+    respond_with do |format|
+      format.html do
+        if request.xhr?
+          render partial: 'subtopic'
+        else
+          render action: 'show'
+        end
+      end
     end
+#    respond_to do |format|
+#      format.html # show.html.erb
+#      format.json { render json: @subtopic }
+#    end
   end
 
   # GET /subtopics/new

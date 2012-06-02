@@ -1,15 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
+<h2>
+  <%= @subtopic.topic.name %>
+</h2>
+<h3>
   <%= @subtopic.name %>
-</p>
-
-<p>
-  <b>Topic:</b>
-  <%= @subtopic.topic_id %>
-</p>
-
+</h3>
+<div id="people">
+  <%= render partial: 'person', collection: @subtopic.people %>
+</div>
 
 <%= link_to 'Edit', edit_subtopic_path(@subtopic) %> |
 <%= link_to 'Back', subtopics_path %>

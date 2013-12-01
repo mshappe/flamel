@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string(255)
+#  password_digest :string(255)
+#  username        :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  is_admin        :boolean
+#  remember_token  :string(255)
+#
+
 # Copyright 2013 Michael Scott Shappe
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,19 +26,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# == Schema Information
-#
-# Table name: users
-#
-#  id              :integer          not null, primary key
-#  email           :string(255)
-#  password_digest :string(255)
-#  username        :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  is_admin        :boolean
-#
-
 class User < ActiveRecord::Base
   before_create :create_remember_token
 

@@ -9,6 +9,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  is_admin        :boolean
+#  remember_token  :string(255)
 #
 
 require 'test_helper'

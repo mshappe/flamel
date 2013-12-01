@@ -1,11 +1,17 @@
 Flamel::Application.routes.draw do
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+
   resources :groups
 
   resources :people
 
-  resources :subtopics
+  resources :topics do
+    resources :subtopics, except: :index
+  end
 
-  resources :topics
+  resources :users
 
   root to: 'topics#index'
 

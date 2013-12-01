@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class PeopleControllerTest < ActionController::TestCase
+
   setup do
     @person = FactoryGirl.build :valid_person
+    sign_in FactoryGirl.create :user
   end
 
   test "should get index" do

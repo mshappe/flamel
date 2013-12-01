@@ -1,0 +1,7 @@
+tr
+  td= link_to subtopic.id, subtopic_path(subtopic)
+  td= subtopic.name
+  td=l subtopic.created_at
+  td
+    = link_to t('.edit', default: t('helpers.links.edit')), edit_subtopic_path(subtopic), class: 'btn btn-mini'
+    = link_to t('.destroy', default: t('helpers.links.destroy')), subtopic_path(subtopic), method: :delete, data: { confirm:  t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, class: 'btn btn-mini btn-danger'

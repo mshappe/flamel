@@ -1,0 +1,12 @@
+- model_class = Subtopic
+h2 Subtopics for #{@topic.name}
+table class="table table-striped"
+  thead
+    tr
+       th= model_class.human_attribute_name(:id)
+       th= model_class.human_attribute_name(:name)
+       th= model_class.human_attribute_name(:created_at)
+       th=t '.actions', :default => t("helpers.actions")
+    tbody
+      = render partial: 'subtopic', collection: @topic.subtopics
+= link_to t('.new', :default => t("helpers.links.new")), new_topic_subtopic_path(@topic), :class => 'btn btn-primary'

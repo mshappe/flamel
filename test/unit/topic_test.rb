@@ -1,25 +1,17 @@
+# == Schema Information
+#
+# Table name: topics
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
-  setup do
-    @bad_topic = FactoryGirl.build :topic
-    @good_topic = FactoryGirl.create :valid_topic
-  end
-  
-  test "cannot create topic without name" do
-    assert @bad_topic.invalid?
-  end
-  
-  test "can create topic" do
-    assert @good_topic.valid?
-  end
-  
-  test "names must be unique" do
-    @not_unique = Topic.create( { name: @good_topic.name } )
-    assert @not_unique.invalid?
-  end
-  
-  # test "the truth" do
-  #   assert true
-  # end
+  should have_many(:subtopics).dependent(:destroy)
+  should validate_presence_of :name
+  should validate_uniqueness_of :name
 end

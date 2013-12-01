@@ -1,0 +1,21 @@
+- model_class = Subtopic
+div class="page-header"
+  h1=t '.title', :default => model_class.model_name.human.titleize
+
+p
+  strong= model_class.human_attribute_name(:name) + ':'
+  br
+  = @subtopic.name
+p
+  strong= model_class.human_attribute_name(:topic) + ':'
+  br
+  = @subtopic.topic.name
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), topic_path(@subtopic.topic), :class => 'btn'
+  '
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_topic_subtopic_path(@topic, @subtopic), :class => 'btn'
+  '
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), topic_subtopic_path(@topic, @subtopic), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+
+= render partial: 'people'

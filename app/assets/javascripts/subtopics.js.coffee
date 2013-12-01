@@ -11,3 +11,6 @@ window.bind_subtopic = (id) ->
   bind('ajax:error',
        (evt, data, status, xhr) ->
          $('#people').html("<h3>Well...that didn't work</h3>"))
+
+$(document).ready ->
+  bind_subtopic( ".subtopic-click-me" )

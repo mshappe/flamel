@@ -1,0 +1,25 @@
+= semantic_form_for @user, :html => { :class => "form-horizontal" } do |f|
+  .control-group
+    = f.label :username, :class => 'control-label'
+    .controls
+      = f.input :username, label: false, :class => 'text_field'
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.input :email, label: false, :class => 'text_field'
+  .control-group
+    = f.label :password, :class => 'control-label'
+    .controls
+      = f.input :password, label: false, :class => 'text_field'
+  .control-group
+    = f.label :password_confirmation, class: 'control-label'
+    .controls
+      = f.input :password_confirmation, label: false, class: 'text_field'
+  .control-group
+    = f.label :is_admin, :class => 'control-label'
+    .controls
+      = f.input :is_admin, label: :false, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), users_path, :class => 'btn'

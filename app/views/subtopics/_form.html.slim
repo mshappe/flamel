@@ -1,0 +1,9 @@
+= semantic_form_for [@topic, @subtopic], :html => { :class => "form-horizontal" } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.input :name, label: false, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    '
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), topic_path(@topic), :class => 'btn'

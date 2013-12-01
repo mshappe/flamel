@@ -40,7 +40,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(params[:person])
+    @person = Person.new(person_params)
 
     respond_to do |format|
       if @person.save
@@ -59,7 +59,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
 
     respond_to do |format|
-      if @person.update_attributes(params[:person])
+      if @person.update_attributes(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,10 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url }
       format.json { head :no_content }
     end
+  end
+
+  def person_params
+    params.require(:person).permit :sca_name, :group_id
+
   end
 end

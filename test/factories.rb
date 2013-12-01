@@ -41,4 +41,11 @@ FactoryGirl.define do
       sequence :name, Faker::Lorem.sentence
     end
   end
+
+  factory :user do
+    sequence :username, Faker::Internet.user_name
+    sequence :email, Faker::Internet.email
+    password '123'
+    password_confirmation '123'
+  end
 end

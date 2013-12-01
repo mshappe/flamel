@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
+  include SessionsHelper
+
   setup do
     @group = FactoryGirl.build :valid_group
   end

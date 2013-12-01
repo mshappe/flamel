@@ -1,94 +1,36 @@
 class SubtopicsController < ApplicationController
-  respond_to :html, :json
+  respond_to :html, except: :index
 
-  # GET /subtopics
-  # GET /subtopics.json
-  def index
-    @subtopics = Subtopic.all
+  before_filter -> { @topic = Topic.find(params[:topic_id]) }
+  before_filter -> { @subtopic = Subtopic.find(params[:id]) }, only: [:show, :edit, :update, :destroy]
+  before_filter -> { @subtopic = @topic.subtopics.build }, only: :new
+  before_filter -> { @subtopic = @topic.subtopics.build subtopic_params }, only: :create
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @subtopics }
-    end
-  end
-
-  # GET /subtopics/1
-  # GET /subtopics/1.json
-  def show
-    @subtopic = Subtopic.find(params[:id])
-
-    respond_with do |format|
-      format.html do
-        if request.xhr?
-          render partial: 'subtopic'
-        else
-          render action: 'show'
-        end
-      end
-    end
-#    respond_to do |format|
-#      format.html # show.html.erb
-#      format.json { render json: @subtopic }
-#    end
-  end
-
-  # GET /subtopics/new
-  # GET /subtopics/new.json
-  def new
-    @subtopic = Subtopic.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @subtopic }
-    end
-  end
-
-  # GET /subtopics/1/edit
-  def edit
-    @subtopic = Subtopic.find(params[:id])
-  end
+  # Minimized controllers are fun!
 
   # POST /subtopics
   # POST /subtopics.json
   def create
-    @subtopic = Subtopic.new(params[:subtopic])
-
-    respond_to do |format|
-      if @subtopic.save
-        format.html { redirect_to @subtopic, notice: 'Subtopic was successfully created.' }
-        format.json { render json: @subtopic, status: :created, location: @subtopic }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @subtopic.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Subtopic was successfully created.' if @subtopic.save
+    respond_with @topic, @subtopic
   end
 
   # PUT /subtopics/1
   # PUT /subtopics/1.json
   def update
-    @subtopic = Subtopic.find(params[:id])
-
-    respond_to do |format|
-      if @subtopic.update_attributes(params[:subtopic])
-        format.html { redirect_to @subtopic, notice: 'Subtopic was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @subtopic.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Subtopic was successfully updated.' if @subtopic.update_attributes(subtopic_params)
+    respond_with @topic, @subtopic
   end
 
-  # DELETE /subtopics/1
-  # DELETE /subtopics/1.json
+# DELETE /subtopics/1
+# DELETE /subtopics/1.json
   def destroy
-    @subtopic = Subtopic.find(params[:id])
     @subtopic.destroy
-
-    respond_to do |format|
-      format.html { redirect_to subtopics_url }
-      format.json { head :no_content }
-    end
+    respond_with @topic, @subtopic, location: @topic
   end
+
+  def subtopic_params
+    params.require(:subtopic).permit :name
+  end
+
 end

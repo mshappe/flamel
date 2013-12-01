@@ -8,7 +8,10 @@ Flamel::Application.routes.draw do
   resources :people
 
   resources :topics do
-    resources :subtopics, except: :index
+    resources :subtopics, except: :index do
+      patch :add_people, on: :member
+      patch :remove_people, on: :member
+    end
   end
 
   resources :users

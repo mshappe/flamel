@@ -45,4 +45,23 @@ class SubtopicsControllerTest < ActionController::TestCase
 
     assert_redirected_to topic_path(@topic)
   end
+
+  test 'remove people JSON' do
+    @people = FactoryGirl.create_list :valid_person, 2
+    @subtopic.people << @people
+    @subtopic.save!
+
+    patch :remove_people, topic_id: @topic.id, id: @subtopic.id, format: :json, subtopic: { person_ids: [@people.first.id] }
+    assert_equal assigns(:subtopic).people.count, 1
+    assert_redirected_to topic_subtopic_path(@topic, @subtopic)
+  end
+
+  test 'add people JSON' do
+    @people = FactoryGirl.create_list :valid_person, 2
+    @subtopic.save!
+
+    patch :add_people, topic_id: @topic.id, id: @subtopic.id, format: :json, subtopic: { person_ids: @people.collect(&:id) }
+    assert_equal assigns(:subtopic).people.count, 2
+    assert_redirected_to topic_subtopic_path(@topic, @subtopic)
+  end
 end

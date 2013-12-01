@@ -18,4 +18,15 @@ p
   '
   = link_to t('.destroy', :default => t("helpers.links.destroy")), topic_subtopic_path(@topic, @subtopic), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
 
-= render partial: 'people'
+#people
+  .left[style='float:left;margin-right: 24px;']
+    h3 Assigned People
+    = semantic_form_for @subtopic, url: remove_people_topic_subtopic_path(@topic, @subtopic) do |f|
+      = f.input :people, label: false, collection: assigned_people(@subtopic), input_html: { style: 'height: 300px;' }
+      = f.submit 'Remove from'
+
+  .right[style='float:left;']
+    h3 Available People
+    = semantic_form_for @subtopic, url: add_people_topic_subtopic_path(@topic, @subtopic) do |f|
+      = f.input :people, label: false, collection: available_people(@subtopic), input_html: { class: 'form-control', style: 'height: 300px;' }
+      = f.submit 'Add to'

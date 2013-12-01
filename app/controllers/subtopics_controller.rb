@@ -1,8 +1,8 @@
 class SubtopicsController < ApplicationController
-  respond_to :html, except: :index
+  respond_to :html, except: [:index]
 
   before_filter -> { @topic = Topic.find(params[:topic_id]) }
-  before_filter -> { @subtopic = Subtopic.find(params[:id]) }, only: [:show, :edit, :update, :destroy]
+  before_filter -> { @subtopic = Subtopic.find(params[:id]) }, only: [:show, :edit, :update, :destroy, :add_people, :remove_people]
   before_filter -> { @subtopic = @topic.subtopics.build }, only: :new
   before_filter -> { @subtopic = @topic.subtopics.build subtopic_params }, only: :create
 
@@ -27,6 +27,17 @@ class SubtopicsController < ApplicationController
   def destroy
     @subtopic.destroy
     respond_with @topic, @subtopic, location: @topic
+  end
+
+  def add_people
+    p params[:subtopic][:person_ids]
+    @subtopic.people.push(Person.where id: params[:subtopic][:person_ids].compact)
+    redirect_to topic_subtopic_path(@topic, @subtopic)
+  end
+
+  def remove_people
+    @subtopic.people.delete(Person.where id: params[:subtopic][:person_ids].compact)
+    redirect_to topic_subtopic_path(@topic, @subtopic)
   end
 
   def subtopic_params

@@ -9,4 +9,3 @@ table class="table table-striped"
        th=t '.actions', :default => t("helpers.actions")
     tbody
       = render partial: 'person', collection: @subtopic.people
-= link_to t('.new', :default => t("helpers.links.new")), new_person_path, :class => 'btn btn-primary'

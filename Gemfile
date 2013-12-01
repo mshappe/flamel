@@ -8,6 +8,7 @@ gem 'rails', '~>4.0'
 gem 'bcrypt-ruby'
 gem 'coffee-rails'#, '~> 3.2.1'
 gem 'formtastic', github: 'justinfrench/formtastic', branch: '2.3-stable'
+gem 'highline'
 gem 'jquery-rails'
 gem "less-rails"
 gem 'sass-rails'#,   '~> 3.2.3'

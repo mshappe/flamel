@@ -12,10 +12,45 @@ Topic.delete_all
 Group.delete_all
 Person.delete_all
 
-FactoryGirl.create_list( :valid_topic, 5 ).each do |topic|
-  FactoryGirl.create_list( :valid_subtopic, 42, topic: topic )
-end
-
-FactoryGirl.create_list( :valid_group, 12 ).each do |group|
-  FactoryGirl.create_list( :valid_person, 18, group: group )
+['Canton of Blachmere',
+'Shire of Border Downs',
+'Barony of Caer Anterth Mawr',
+'Barony of Castel Rouge',
+'Canton of Coille Stoirmeil',
+'Shire of Coldedernhale',
+'Shire of Darkstone',
+'Shire of Dreibrucken',
+'Shire of Falcon\'s Keep',
+'Village of Heorot Denu',
+'Village of Hvitskogar',
+'Shire of Inner Sea',
+'Barony of Jararvellir',
+'Shire of Korsväg',
+'Village of Lub Siochail',
+'Shire of Mare Amethystenum',
+'Shire of Midewinde',
+'Shire of Mistig Waetru',
+'Shire of Noiregarde',
+'Canton of Nordleigh',
+'Barony of Nordskogen',
+'Village of Norwealdmere',
+'Shire of Orlova Dolina',
+'Village of Oubliette',
+'Shire of Rivenwood Tower',
+'Shire of Rockhaven',
+'Shire of Rokeclif',
+'Shire of Rudivale',
+'Shire of Schattentor',
+'Shire of Shattered Oak',
+'Shire of Silfren Mere',
+'SHire of Skerjastrond',
+'Village of Stromfels',
+'College of Svaty Sebesta',
+'College of Tor Aerie',
+'Shire of Trewint',
+'Shire of Turm am dem See',
+'Shire of Vilku Urvas',
+'Barony of Windhaven',
+'Shire of Wynandremer'].each do |g|
+  Group.create name: g
 end
